@@ -31,7 +31,10 @@ exports.addAds = (req, res) => {
   newAds
     .save()
     .then((data) => res.status(201).send(data))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send(err);
+    });
 };
 
 exports.updateAdById = (req, res) => {
@@ -39,18 +42,28 @@ exports.updateAdById = (req, res) => {
   const newAds = req.body;
   Ads.findByIdAndUpdate(id, { newAds })
     .then((data) => res.send(data))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send(err);
+    });
 };
 
 exports.deleteAdById = (req, res) => {
   const id = req.params.id;
 
   Ads.findByIdAndRemove(id)
-    .then((data) =>
-      res.json({
-        message: "Cette annonce a bien été supprimée",
-        data,
-      })
-    )
-    .catch((err) => console.log(err));
+    .then((data) => {
+      if (data !== null) {
+        res.json({
+          message: "Cette annonce a bien été supprimée",
+          data,
+        });
+      } else {
+        res.send("Aucun produit trouv");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send(400).send(err);
+    });
 };
