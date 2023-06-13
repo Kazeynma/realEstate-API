@@ -40,7 +40,7 @@ exports.addAds = (req, res) => {
 exports.updateAdById = (req, res) => {
   const id = req.params.id;
   const newAds = req.body;
-  Ads.findByIdAndUpdate(id, { newAds })
+  Ads.findByIdAndUpdate(id, { $set: { newAds } })
     .then((data) => res.send(data))
     .catch((err) => {
       console.log(err);
