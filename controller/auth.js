@@ -69,6 +69,6 @@ exports.Login = (req, res) => {
         process.env.SECRET_KEY,
         { expiresIn: "5h" }
       );
-      res.send(token);
+      res.send({ token: token, message: "Vous êtes connecté" });
     });
 };

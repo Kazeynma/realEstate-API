@@ -23,6 +23,7 @@ const productRouter = require("./routes/ads");
 const authRouter = require("./routes/auth");
 
 const options = {
+  failOnErrors: true,
   definition: {
     openapi: "3.0.0",
     info: {
