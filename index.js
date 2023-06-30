@@ -21,6 +21,7 @@ db.on("error", console.error.bind(console, "Mongo connection error"));
 
 const productRouter = require("./routes/ads");
 const authRouter = require("./routes/auth");
+const userRouter = require("./routes/user")
 
 const options = {
   failOnErrors: true,
@@ -42,4 +43,5 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(bodyParser.json());
 
 app.use("/product", productRouter);
-app.use("/user", authRouter);
+app.use("/auth", authRouter);
+app.use('/user', userRouter);
